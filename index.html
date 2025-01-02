@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayWithLLM</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2575fc;
+            --secondary-color: #6a11cb;
+            --accent-color: #ff6b6b;
+            --text-color: #2d3436;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/1920/1080') center/cover;
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn-custom {
+            padding: 12px 32px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .features {
+            padding: 100px 0;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .code-section {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .code-block code {
+            color: #fff;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 1rem 0;
+        }
+
+        .pricing-card h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-image {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand h1 mb-0" href="#">PlayWithLLM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#docs">Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-custom ms-lg-3" href="#signup">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h1>Build Intelligent Apps with 10K Free Tokens/Day</h1>
+                    <p>Launch your AI-powered applications with our developer-friendly API. No credit card needed—Pay with bKash or Nagad.</p>
+                    <a href="https://app.playwithllm.com" class="btn btn-light btn-custom me-3">Get Started Free</a>
+                    <a href="https://app.playwithllm.com/documentation" class="btn btn-outline-light btn-custom">View Docs</a>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="/images/img1.webp" alt="API Illustration showing connected cubes and cloud computing concepts" class="img-fluid floating-image" style="opacity: 0.9; backdrop-filter: blur(5px);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Why Choose Us?</h2>
+                <p class="lead text-muted">Powerful features to supercharge your applications</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h4 class="mb-3">Low Latency</h4>
+                        <p class="text-muted">Experience lightning-fast responses for your real-time applications with our optimized infrastructure.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-language feature-icon"></i>
+                        <h4 class="mb-3">Local LLM</h4>
+                        <p class="text-muted"></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-code feature-icon"></i>
+                        <h4 class="mb-3">Easy Integration</h4>
+                        <p class="text-muted">Developer-friendly APIs with comprehensive documentation and example code in multiple languages.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-tags feature-icon"></i>
+                        <h4 class="mb-3">Fair Pricing</h4>
+                        <p class="text-muted">Transparent, usage-based pricing with no hidden fees. Only pay for what you actually use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section" id="docs">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Quick Start Guide</h2>
+                <p class="lead text-muted">Get up and running in minutes with our simple API</p>
+            </div>
+            <div class="code-block">
+                <code>
+fetch('https://api.playwithllm.com/api/generate', {
+    method: 'POST',
+    headers: {
+        'x-api-key': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ prompt: 'Hello World!' })
+})
+.then(response => response.json())
+.then(data => console.log(data));
+                </code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing py-5" id="pricing">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Simple, Transparent Pricing</h2>
+                <p class="lead text-muted">Start free, scale as you grow</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="pricing-card text-center">
+                        <h3 class="mb-4">Free Tier</h3>
+                        <p class="display-4 fw-bold mb-4">10,000</p>
+                        <p class="text-muted mb-4">tokens/day</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Full API Access</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Basic Support</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Community Access</li>
+                        </ul>
+                        <a href="#signup" class="btn btn-outline-primary btn-custom">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pricing-card text-center">
+                        <h3 class="mb-4">Pay As You Go</h3>
+                        <p class="display-4 fw-bold mb-4">1 BDT</p>
+                        <p class="text-muted mb-4">per million tokens</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Unlimited Access</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Priority Support</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Custom Solutions</li>
+                        </ul>
+                        <a href="#signup" class="btn btn-primary btn-custom">Choose Plan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <h4 class="h3 mb-4">PlayWithLLM</h4>
+            <p class="text-muted mb-4">Empowering developers to build intelligent applications with ease.</p>
+            <div class="social-links mb-4">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <hr class="my-4">
+            <p class="mb-0">© 2025 
